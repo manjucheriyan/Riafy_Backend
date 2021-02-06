@@ -20,5 +20,13 @@
   "devDependencies": {},
   "author": "manju cheriyan",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/manjucheriyan/Riafy_Backend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/manjucheriyan/Riafy_Backend/issues"
+  },
+  "homepage": "https://github.com/manjucheriyan/Riafy_Backend#readme",
   "description": ""
 }
