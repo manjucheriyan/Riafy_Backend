@@ -14,14 +14,39 @@ const mongoose = require('mongoose');
 var app = express();
 //mongoose.connect('mongodb://localhost:27017/riafy_db')
 //Changed to Mongo Atlas
-mongoose.connect('mongodb+srv://manju:manju@cluster0.ajzha.mongodb.net/riafy_db')
 
 
+const url = 'mongodb+srv://manju:manju@cluster0.ajzha.mongodb.net/riafy_db?retryWrites=true&w=majority';
+
+const connectionParams={
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true 
+}
+mongoose.connect(url,connectionParams)
+    .then( () => {
+        console.log('Connected to database ')
+    })
+    .catch( (err) => {
+        console.error(`Error connecting to the database. \n${err}`);
+    })
+
+  
+
+
+
+
+app.use(cors({
+  origin:"https://salty-chamber-46201.herokuapp.com",
+  credentials:true
+}));
+
+/*
 app.use(cors({
   origin:"http://localhost:3000",
   credentials:true
 }));
-
+*/
 function logMiddleware(req,res,next)
 {
   console.log("Function logMiddleware");

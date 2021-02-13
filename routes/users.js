@@ -1,11 +1,7 @@
 var express = require('express');
-//const bank = require('../services/bank');
 var router = express.Router();
 var BackEndController = require('../services/BackEndController');
 var StockController = require('../services/StockController');
-
-
-
 
 function authMiddleware(req,res,next){
   console.log("Inside authMiddleware");
@@ -16,23 +12,23 @@ function authMiddleware(req,res,next){
     res.staus(401).send({message:"Please login"});
   }
 }
-/* GET users listing. */
 
+/* GET users listing. */
 router.get('/', function(req, res) {
+  console.log("Users router ---- ");
   Bank.getUsers()
   .then(data=>{
-    res.status(data.statusCode).send({message:data.message,users:data.users});
+    res.status(data.statusCode).send(
+      {message:data.message,
+        users:data.users});
   });
 });
 
 
-
 router.post('/login',function(req, res) {
-  console.log("In Login Router");
+  console.log("Users router ---- login");
   let username=req.body.username;
   let password=req.body.password;
-  console.log(username);
-  console.log(password);
   BackEndController.login(username,password)
   .then(data=>{
     if(data.statusCode==200){
@@ -42,11 +38,17 @@ router.post('/login',function(req, res) {
   }) 
 });
 
+
+router.get('/testing',function(req, res) {
+    console.log("Users router ---- testing");
+    res.send({text:"Manju Cheriyan"}); 
+  } 
+);
+
+
 router.post('/register',function(req, res) {
-  
-  console.log("In Register+kll");
-  let StockName=req.body.StockName;
-       
+  console.log("Users router ---- register");
+  let StockName=req.body.StockName;       
   let category = req.body.category;
   let MarketCap = req.body.MarketCap  ;
   let CurrentMarketPriceofstock=req.body.CurrentMarketPriceofstock;
@@ -59,8 +61,6 @@ router.post('/register',function(req, res) {
   let Reserves=req.body.Reserves;
   let Debt=req.body.Debt;
 
-
-
   if(category==""){
     res.status(400).send({message:"field cant be null"});
   }
@@ -72,20 +72,16 @@ router.post('/register',function(req, res) {
       res.status(data.statusCode).send({message:data.message});
     }) 
   }
-
 })
 
 router.post('/categoryList', function(req, res) {
-  console.log("In CategorList");
+  console.log("Users router ---- categoryList");
   let category=req.body.category;
-  console.log(category)
   
   StockController.getProvidersByCategory(category)
   .then(data=>{
     res.status(data.statusCode).send({message:data.message,users:data.users});
   });
 });
-
-
 
 module.exports = router;

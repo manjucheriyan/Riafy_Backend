@@ -15,10 +15,8 @@ function getUsers(){
 }
 
 
-
-
 function login(username,password){
-    console.log('Login Function in BackendController.js.........................')
+    console.log('BackendController.js ---- login')
     return User.findOne({
         username,
         password
@@ -37,6 +35,7 @@ function login(username,password){
     })
     
 }
+
 
 
 function deleteUser(username){
@@ -77,6 +76,5 @@ module.exports={
     
     setCurrentUser:setCurrentUser,
     getCurrentUser:getCurrentUser,
-    
     deleteUser:deleteUser
     }
